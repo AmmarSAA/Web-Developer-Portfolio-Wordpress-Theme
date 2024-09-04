@@ -1,0 +1,33 @@
+/**
+ * Theme Name: SAA Web Developer Portfolio
+ * Theme URI: https://www.github.com/AmmarSAA/web-developer-portfolio-Wordpress-Theme
+ * Description: A light-weight wordpress theme for web developer portfolio. It uses tailwindcss for styling.
+ * Author: AmmarSAA
+ * Author URI: https://www.github.com/AmmarSAA
+ * Version: 1.0
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags: responsive-layout, custom-colors, custom-background, custom-logo, translation-ready
+ * Text Domain: saa-web-developer-portfolio
+ */
+
+/* Reset default browser styles */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+/* Add your custom styles below */

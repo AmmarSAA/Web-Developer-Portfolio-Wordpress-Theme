@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: __cubonoFont_2e4512;
+  src: url(./fonts/9bf7d678ada856dc-s.p.ttf) format("truetype");
+  font-display: swap;
+  font-weight: 900;
+}
+@font-face {
+  font-family: __cubonoFont_Fallback_2e4512;
+  src: local("Arial");
+  ascent-override: 84.85%;
+  descent-override: 16.97%;
+  line-gap-override: 0%;
+  size-adjust: 117.86%;
+}
+.__className_2e4512 {
+  font-family: __cubonoFont_2e4512, __cubonoFont_Fallback_2e4512;
+  font-weight: 900;
+}
+.__variable_2e4512 {
+  --font-heading: "__cubonoFont_2e4512", "__cubonoFont_Fallback_2e4512";
+}
+@font-face {
+  font-family: __primaryFont_b5b832;
+  src: url(./fonts/86a19cbd70da903c-s.p.ttf) format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: __primaryFont_Fallback_b5b832;
+  src: local("Arial");
+  ascent-override: 96.89%;
+  descent-override: 19.49%;
+  line-gap-override: 0%;
+  size-adjust: 103.11%;
+}
+.__className_b5b832 {
+  font-family: __primaryFont_b5b832, __primaryFont_Fallback_b5b832;
+}
+.__variable_b5b832 {
+  --font-primary: "__primaryFont_b5b832", "__primaryFont_Fallback_b5b832";
+}
+@font-face {
+  font-family: __secondaryFont_b7db21;
+  src: url(./fonts/ee43fef3c761122d-s.p.ttf) format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: __secondaryFont_Fallback_b7db21;
+  src: local("Arial");
+  ascent-override: 88.78%;
+  descent-override: 26.34%;
+  line-gap-override: 0%;
+  size-adjust: 110.84%;
+}
+.__className_b7db21 {
+  font-family: __secondaryFont_b7db21, __secondaryFont_Fallback_b7db21;
+}
+.__variable_b7db21 {
+  --font-secondary: "__secondaryFont_b7db21", "__secondaryFont_Fallback_b7db21";
+}
