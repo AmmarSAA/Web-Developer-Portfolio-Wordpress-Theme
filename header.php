@@ -7,6 +7,9 @@
     <meta name="description"
         content="Welcome to my personal portfolio website. I am a passionate and skilled full stack developer with expertise in modern web technologies, including HTML, CSS, JavaScript, TypeScript, React, Next.js, Node.js, Express.js, MongoDB, and more. Explore the portfolio to learn more about my projects, skills, and experience in building dynamic and responsive web applications.">
 
+    <!-- Google Adsense -->
+    <meta name="google-adsense-account" content="ca-pub-2314340578474791">
+
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
     <!-- Tailwind CSS -->
