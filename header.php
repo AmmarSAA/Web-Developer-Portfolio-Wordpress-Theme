@@ -2,7 +2,7 @@
 <html <?php language_attributes(); ?> class="no-scrollbar">
 
 <head>
-    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta charset="<?php bloginfo(show: 'charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
         content="Welcome to my personal portfolio website. I am a passionate and skilled full stack developer with expertise in modern web technologies, including HTML, CSS, JavaScript, TypeScript, React, Next.js, Node.js, Express.js, MongoDB, and more. Explore the portfolio to learn more about my projects, skills, and experience in building dynamic and responsive web applications.">
@@ -20,11 +20,11 @@
 
         // Fallback if the title is empty
         if (empty($title)) {
-            $title = get_bloginfo('description');
+            $title = get_bloginfo(show: 'description');
         }
 
         // Output the title as plain text
-        echo esc_html($title);
+        echo esc_html(text: $title);
         ?>
     </title>
 

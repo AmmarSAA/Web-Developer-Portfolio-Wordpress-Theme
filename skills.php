@@ -23,16 +23,16 @@ $skills = get_skills_from_customizer();
                 </h4>
                 <div class="skills flex flex-col items-center gap-8">
                     <div class="carousel" data-reverse="false"
-                        style="--card-items: <?php echo count($skills['frontend']); ?>">
+                        style="--card-items: <?php echo count(value: $skills['frontend']); ?>">
                         <div class="track h-full">
                             <?php if (!empty($skills['frontend'])): ?>
                                 <?php foreach ($skills['frontend'] as $index => $skill): ?>
                                     <div class="card grid cursor-pointer place-content-center place-items-center gap-1 rounded-md border border-secondary-foreground bg-gray-900 hover:border-main"
                                         style="--card-index: <?php echo $index + 1; ?>">
-                                        <img alt="<?php echo esc_attr($skill['name']); ?> image" loading="lazy" width="40"
+                                        <img alt="<?php echo esc_attr(text: $skill['name']); ?> image" loading="lazy" width="40"
                                             height="40" src="<?php echo $skill['image']; ?>" />
                                         <p class="text-primary-foreground tracking-tighter md:text-xl">
-                                            <?php echo esc_html($skill['name']); ?>
+                                            <?php echo esc_html(text: $skill['name']); ?>
                                         </p>
                                     </div>
                                 <?php endforeach; ?>
@@ -51,16 +51,16 @@ $skills = get_skills_from_customizer();
                         Backend
                     </h4>
                     <div class="carousel" data-reverse="true"
-                        style="--card-items: <?php echo count($skills['backend']); ?>">
+                        style="--card-items: <?php echo count(value: $skills['backend']); ?>">
                         <div class="track h-full">
                             <?php if (!empty($skills['backend'])): ?>
                                 <?php foreach ($skills['backend'] as $index => $skill): ?>
                                     <div class="card grid cursor-pointer place-content-center place-items-center gap-1 rounded-md border border-secondary-foreground bg-gray-900 hover:border-main"
                                         style="--card-index: <?php echo $index + 1; ?>">
-                                        <img alt="<?php echo esc_attr($skill['name']); ?> image" loading="lazy" width="40"
+                                        <img alt="<?php echo esc_attr(text: $skill['name']); ?> image" loading="lazy" width="40"
                                             height="40" src="<?php echo $skill['image']; ?>" />
                                         <p class="text-primary-foreground tracking-tighter md:text-xl">
-                                            <?php echo esc_html($skill['name']); ?>
+                                            <?php echo esc_html(text: $skill['name']); ?>
                                         </p>
                                     </div>
                                 <?php endforeach; ?>
@@ -77,16 +77,16 @@ $skills = get_skills_from_customizer();
                         Tools
                     </h4>
                     <div class="carousel" data-reverse="false"
-                        style="--card-items: <?php echo count($skills['tools']); ?>">
+                        style="--card-items: <?php echo count(value: $skills['tools']); ?>">
                         <div class="track h-full">
                             <?php if (!empty($skills['tools'])): ?>
                                 <?php foreach ($skills['tools'] as $index => $skill): ?>
                                     <div class="card grid cursor-pointer place-content-center place-items-center gap-1 rounded-md border border-secondary-foreground bg-gray-900 hover:border-main"
                                         style="--card-index: <?php echo $index + 1; ?>">
-                                        <img alt="<?php echo esc_attr($skill['name']); ?> image" loading="lazy" width="40"
+                                        <img alt="<?php echo esc_attr(text: $skill['name']); ?> image" loading="lazy" width="40"
                                             height="40" src="<?php echo $skill['image']; ?>" />
                                         <p class="text-primary-foreground tracking-tighter md:text-xl">
-                                            <?php echo esc_html($skill['name']); ?>
+                                            <?php echo esc_html(text: $skill['name']); ?>
                                         </p>
                                     </div>
                                 <?php endforeach; ?>

@@ -3,15 +3,15 @@
 get_header(); ?>
 <div>
     <div class="px-4"></div>
-    <?php get_template_part('hero'); ?>
+    <?php get_template_part(slug: 'hero'); ?>
     <div class="border border-main/40"></div>
-    <?php get_template_part('about'); ?>
+    <?php get_template_part(slug: 'about'); ?>
     <div class="border border-main/40"></div>
-    <?php get_template_part('skills'); ?>
+    <?php get_template_part(slug: 'skills'); ?>
     <div class="border border-main/40"></div>
-    <?php get_template_part('projects'); ?>
+    <?php get_template_part(slug: 'projects'); ?>
     <div class="border border-main/40"></div>
-    <?php get_template_part('contact'); ?>
+    <?php get_template_part(slug: 'contact'); ?>
 </div>
 </div>
 <!-- <div id="content">

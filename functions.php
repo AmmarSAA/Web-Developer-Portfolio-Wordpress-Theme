@@ -1,12 +1,12 @@
 <?php
-function my_nextjs_theme_enqueue_scripts()
+function my_nextjs_theme_enqueue_scripts(): void
 {
     // wp_enqueue_style('ma in-style', get_template_directory_uri() . '/assets/css/d76beb3d870e0ea3.css');
     // wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/main.js', array(), null, true);
 }
-add_action('wp_enqueue_scripts', 'my_nextjs_theme_enqueue_scripts');
+add_action(hook_name: 'wp_enqueue_scripts', callback: 'my_nextjs_theme_enqueue_scripts');
 
-function saa_web_developer_portfolio_theme_customizer($wp_customize)
+function saa_web_developer_portfolio_theme_customizer($wp_customize): void
 {
 
 
@@ -15,8 +15,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Hero Section Settings
     $wp_customize->add_section('hero_section', array(
-        'title' => __('Hero Section', 'web-developer-portfolio'),
-        'description' => __('Customize the Hero section.', 'web-developer-portfolio'),
+        'title' => __(text: 'Hero Section', domain: 'web-developer-portfolio'),
+        'description' => __(text: 'Customize the Hero section.', domain: 'web-developer-portfolio'),
         'priority' => 30,
     ));
 
@@ -28,7 +28,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Control for Hero Name
     $wp_customize->add_control('hero_name', array(
-        'label' => __('Name', 'web-developer-portfolio'),
+        'label' => __(text: 'Name', domain: 'web-developer-portfolio'),
         'section' => 'hero_section',
         'type' => 'text',
     ));
@@ -41,7 +41,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Control for Hero Description
     $wp_customize->add_control('hero_description', array(
-        'label' => __('Description', 'web-developer-portfolio'),
+        'label' => __(text: 'Description', domain: 'web-developer-portfolio'),
         'section' => 'hero_section',
         'type' => 'textarea',
     ));
@@ -54,7 +54,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Control for Resume Link
     $wp_customize->add_control('resume_link', array(
-        'label' => __('Resume Link', 'web-developer-portfolio'),
+        'label' => __(text: 'Resume Link', domain: 'web-developer-portfolio'),
         'section' => 'hero_section',
         'type' => 'url',
     ));
@@ -67,10 +67,10 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Control for Typewriter Text
     $wp_customize->add_control('hero_typewriter_text', array(
-        'label' => __('Typewriter Text CSS', 'web-developer-portfolio'),
+        'label' => __(text: 'Typewriter Text CSS', domain: 'web-developer-portfolio'),
         'section' => 'hero_section',
         'type' => 'textarea',
-        'description' => __('Update this CSS to edit typewriter text.', 'web-developer-portfolio'),
+        'description' => __(text: 'Update this CSS to edit typewriter text.', domain: 'web-developer-portfolio'),
     ));
 
 
@@ -79,62 +79,62 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add About Section
     $wp_customize->add_section('about_section', array(
-        'title' => __('About Section', 'saa-web-developer-portfolio'),
-        'description' => __('Customize the About section.', 'saa-web-developer-portfolio'),
+        'title' => __(text: 'About Section', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Customize the About section.', domain: 'saa-web-developer-portfolio'),
         'priority' => 30,
     ));
 
     // Add Setting and Control for Section Title
     $wp_customize->add_setting('about_section_title', array(
-        'default' => __('Who Am I', 'saa-web-developer-portfolio'),
+        'default' => __(text: 'Who Am I', domain: 'saa-web-developer-portfolio'),
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('about_section_title', array(
-        'label' => __('Section Title', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Section Title', domain: 'saa-web-developer-portfolio'),
         'section' => 'about_section',
         'type' => 'text',
     ));
 
     // Add Setting and Control for About Paragraphs
     $wp_customize->add_setting('about_paragraph_1', array(
-        'default' => __('Hello, I\'m Syed Ammar Ahmed, a <span class="text-typewriter">passionate and innovative developer</span> deeply immersed in the world of technology. With a strong foundation in <span class="text-typewriter">JavaScript, Wordpress, PHP</span> And <span class="text-typewriter">Dart</span>, I excel in crafting dynamic and innovative solutions across various <span class="text-typewriter">web</span> and <span class="text-typewriter">mobile</span> application frameworks. I have a keen interest in exploring diverse technologies and thrive on solving complex problems.', 'saa-web-developer-portfolio'),
+        'default' => __(text: 'Hello, I\'m Syed Ammar Ahmed, a <span class="text-typewriter">passionate and innovative developer</span> deeply immersed in the world of technology. With a strong foundation in <span class="text-typewriter">JavaScript, Wordpress, PHP</span> And <span class="text-typewriter">Dart</span>, I excel in crafting dynamic and innovative solutions across various <span class="text-typewriter">web</span> and <span class="text-typewriter">mobile</span> application frameworks. I have a keen interest in exploring diverse technologies and thrive on solving complex problems.', domain: 'saa-web-developer-portfolio'),
         'sanitize_callback' => 'wp_kses_post',
     ));
     $wp_customize->add_control('about_paragraph_1', array(
-        'label' => __('About Paragraph 1', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'About Paragraph 1', domain: 'saa-web-developer-portfolio'),
         'section' => 'about_section',
         'type' => 'textarea',
     ));
 
     $wp_customize->add_setting('about_paragraph_2', array(
-        'default' => __('My journey in programming has been marked by a relentless drive for <span class="text-typewriter">learning and self-improvement</span>. I am known for my <span class="text-typewriter">quick adaptability</span> and enthusiasm in embracing new challenges. From frontend to backend development, I enjoy leveraging my skills to create impactful and <span class="text-typewriter">user-friendly web experiences</span>. I am actively seeking opportunities that allow me to apply my <span class="text-typewriter">expertise and creativity</span>.', 'saa-web-developer-portfolio'),
+        'default' => __(text: 'My journey in programming has been marked by a relentless drive for <span class="text-typewriter">learning and self-improvement</span>. I am known for my <span class="text-typewriter">quick adaptability</span> and enthusiasm in embracing new challenges. From frontend to backend development, I enjoy leveraging my skills to create impactful and <span class="text-typewriter">user-friendly web experiences</span>. I am actively seeking opportunities that allow me to apply my <span class="text-typewriter">expertise and creativity</span>.', domain: 'saa-web-developer-portfolio'),
         'sanitize_callback' => 'wp_kses_post',
     ));
     $wp_customize->add_control('about_paragraph_2', array(
-        'label' => __('About Paragraph 2', 'saa-web-developer-portfolio'),
-        'description' => __('Enter the more text to display in the about section.(optional)', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'About Paragraph 2', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Enter the more text to display in the about section.(optional)', domain: 'saa-web-developer-portfolio'),
         'section' => 'about_section',
         'type' => 'textarea',
     ));
 
     // Add Setting and Control for Years of Coding
     $wp_customize->add_setting('about_years_of_coding', array(
-        'default' => __('02+', 'saa-web-developer-portfolio'),
+        'default' => __(text: '03+', domain: 'saa-web-developer-portfolio'),
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('about_years_of_coding', array(
-        'label' => __('Years of Coding', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Years of Coding', domain: 'saa-web-developer-portfolio'),
         'section' => 'about_section',
         'type' => 'text',
     ));
 
     // Add Setting and Control for Completed Projects
     $wp_customize->add_setting('about_completed_projects', array(
-        'default' => __('07+', 'saa-web-developer-portfolio'),
+        'default' => __(text: '07+', domain: 'saa-web-developer-portfolio'),
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('about_completed_projects', array(
-        'label' => __('Completed Projects', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Completed Projects', domain: 'saa-web-developer-portfolio'),
         'section' => 'about_section',
         'type' => 'text',
     ));
@@ -145,8 +145,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add section for contact details
     $wp_customize->add_section('contact_section', array(
-        'title' => __('Contact Section', 'saa-web-developer-portfolio'),
-        'description' => __('Customize the contact section of the theme.', 'saa-web-developer-portfolio'),
+        'title' => __(text: 'Contact Section', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Customize the contact section of the theme.', domain: 'saa-web-developer-portfolio'),
         'priority' => 80,
     ));
 
@@ -158,7 +158,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for email address
     $wp_customize->add_control('contact_email', array(
-        'label' => __('Contact Email', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Contact Email', domain: 'saa-web-developer-portfolio'),
         'section' => 'contact_section',
         'type' => 'email',
     ));
@@ -171,7 +171,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for project call-to-action text
     $wp_customize->add_control('project_cta_text', array(
-        'label' => __('Project CTA Text', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Project CTA Text', domain: 'saa-web-developer-portfolio'),
         'description' => 'Enter the text to display in the project call-to-action button.',
         'section' => 'contact_section',
         'type' => 'text',
@@ -185,7 +185,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for contact description text
     $wp_customize->add_control('contact_description', array(
-        'label' => __('Contact Description', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Contact Description', domain: 'saa-web-developer-portfolio'),
         'description' => 'Enter the text to display in the contact section.',
         'section' => 'contact_section',
         'type' => 'textarea',
@@ -197,7 +197,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
         'sanitize_callback' => 'esc_url_raw',
     ));
     $wp_customize->add_control('link_1', array(
-        'label' => __('Link 1 URL', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Link 1 URL', domain: 'saa-web-developer-portfolio'),
         'section' => 'contact_section',
         'type' => 'url',
     ));
@@ -207,8 +207,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
         'default' => get_template_directory_uri() . '/assets/skills/github.svg',
         'sanitize_callback' => 'esc_url_raw',
     ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'link_1_logo', array(
-        'label' => __('Link 1 Logo', 'saa-web-developer-portfolio'),
+    $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: 'link_1_logo', args: array(
+        'label' => __(text: 'Link 1 Logo', domain: 'saa-web-developer-portfolio'),
         'section' => 'contact_section',
         'settings' => 'link_1_logo',
     )));
@@ -219,7 +219,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
         'sanitize_callback' => 'esc_url_raw',
     ));
     $wp_customize->add_control('link_2', array(
-        'label' => __('Link 2 URL', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Link 2 URL', domain: 'saa-web-developer-portfolio'),
         'section' => 'contact_section',
         'type' => 'url',
     ));
@@ -229,8 +229,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
         'default' => get_template_directory_uri() . '/assets/svg/linkedin.svg',
         'sanitize_callback' => 'esc_url_raw',
     ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'link_2_logo', array(
-        'label' => __('Link 2 Logo', 'saa-web-developer-portfolio'),
+    $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: 'link_2_logo', args: array(
+        'label' => __(text: 'Link 2 Logo', domain: 'saa-web-developer-portfolio'),
         'section' => 'contact_section',
         'settings' => 'link_2_logo',
     )));
@@ -241,20 +241,20 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add section for footer settings
     $wp_customize->add_section('footer_section', array(
-        'title' => __('Footer Settings', 'saa-web-developer-portfolio'),
+        'title' => __(text: 'Footer Settings', domain: 'saa-web-developer-portfolio'),
         'priority' => 90,
     ));
 
     // Add setting for footer text
     $wp_customize->add_setting('footer_text', array(
-        'default' => '&copy; ' . date('Y') . ' WordPress Theme Designed And Developed By 💚 <b><a href="https://github.com/ammarsaa" target="_blank">Syed Ammar Ahmed</a></b>',
+        'default' => '&copy; ' . date(format: 'Y') . ' WordPress Theme Designed And Developed By 💚 <b><a href="https://github.com/ammarsaa" target="_blank">Syed Ammar Ahmed</a></b>',
         'sanitize_callback' => 'wp_kses_post',
     ));
 
     // Add control for footer text
     $wp_customize->add_control('footer_text', array(
-        'label' => __('Footer Text', 'saa-web-developer-portfolio'),
-        'description' => __('Enter the text to display in the footer. You can use HTML here.', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Footer Text', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Enter the text to display in the footer. You can use HTML here.', domain: 'saa-web-developer-portfolio'),
         'section' => 'footer_section',
         'type' => 'textarea',
     ));
@@ -267,8 +267,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for Footer link
     $wp_customize->add_control('footer_link', array(
-        'label' => __('Footer Link', 'saa-web-developer-portfolio'),
-        'description' => __('Enter the URL.', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Footer Link', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Enter the URL.', domain: 'saa-web-developer-portfolio'),
         'section' => 'footer_section',
         'type' => 'url',
     ));
@@ -280,9 +280,9 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
     ));
 
     // Add control for link logo
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'link_logo', array(
-        'label' => __('Change Logo', 'saa-web-developer-portfolio'),
-        'description' => __('Upload a logo for the link.', 'saa-web-developer-portfolio'),
+    $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: 'link_logo', args: array(
+        'label' => __(text: 'Change Logo', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Upload a logo for the link.', domain: 'saa-web-developer-portfolio'),
         'section' => 'footer_section',
         'settings' => 'github_logo',
     )));
@@ -295,8 +295,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for "Give a Star" text
     $wp_customize->add_control('link_text', array(
-        'label' => __('Link Text', 'saa-web-developer-portfolio'),
-        'description' => __('Enter the text to display next to the link logo.', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Link Text', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Enter the text to display next to the link logo.', domain: 'saa-web-developer-portfolio'),
         'section' => 'footer_section',
         'type' => 'text',
     ));
@@ -308,7 +308,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add a section for Projects
     $wp_customize->add_section('projects_section', array(
-        'title' => __('Projects', 'saa-web-developer-portfolio'),
+        'title' => __(text: 'Projects', domain: 'saa-web-developer-portfolio'),
         'priority' => 100,
     ));
 
@@ -320,8 +320,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for the number of projects
     $wp_customize->add_control('total_no_of_projects', array(
-        'label' => __('Total No. of Projects', 'saa-web-developer-portfolio'),
-        'description' => __('Enter the number of projects you want to show on your portfolio', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Total No. of Projects', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Enter the number of projects you want to show on your portfolio', domain: 'saa-web-developer-portfolio'),
         'section' => 'projects_section',
         'type' => 'number',
         'input_attrs' => array(
@@ -331,14 +331,14 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
     ));
 
     // Dynamically add settings and controls based on the number of projects
-    $total_projects = get_theme_mod('total_no_of_projects', 4);
+    $total_projects = get_theme_mod(name: 'total_no_of_projects', default_value: 4);
     for ($i = 1; $i <= $total_projects; $i++) {
         $wp_customize->add_setting("project_{$i}_title", array(
             'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['title'],
             'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control("project_{$i}_title", array(
-            'label' => __("Project {$i} Title", 'saa-web-developer-portfolio'),
+            'label' => __(text: "Project {$i} Title", domain: 'saa-web-developer-portfolio'),
             'section' => 'projects_section',
             'type' => 'text',
         ));
@@ -347,8 +347,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
             'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['image'],
             'sanitize_callback' => 'esc_url_raw',
         ));
-        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "project_{$i}_image", array(
-            'label' => __("Project {$i} Image", 'saa-web-developer-portfolio'),
+        $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: "project_{$i}_image", args: array(
+            'label' => __(text: "Project {$i} Image", domain: 'saa-web-developer-portfolio'),
             'section' => 'projects_section',
             'settings' => "project_{$i}_image",
         )));
@@ -358,7 +358,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
             'sanitize_callback' => 'sanitize_textarea_field',
         ));
         $wp_customize->add_control("project_{$i}_description", array(
-            'label' => __("Project {$i} Description", 'saa-web-developer-portfolio'),
+            'label' => __(text: "Project {$i} Description", domain: 'saa-web-developer-portfolio'),
             'section' => 'projects_section',
             'type' => 'textarea',
         ));
@@ -368,7 +368,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
             'sanitize_callback' => 'esc_url_raw',
         ));
         $wp_customize->add_control("project_{$i}_live_demo", array(
-            'label' => __("Project {$i} Live Demo URL", 'saa-web-developer-portfolio'),
+            'label' => __(text: "Project {$i} Live Demo URL", domain: 'saa-web-developer-portfolio'),
             'section' => 'projects_section',
             'type' => 'url',
         ));
@@ -378,7 +378,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
             'sanitize_callback' => 'esc_url_raw',
         ));
         $wp_customize->add_control("project_{$i}_github", array(
-            'label' => __("Project {$i} GitHub URL", 'saa-web-developer-portfolio'),
+            'label' => __(text: "Project {$i} GitHub URL", domain: 'saa-web-developer-portfolio'),
             'section' => 'projects_section',
             'type' => 'url',
         ));
@@ -387,7 +387,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add a section for Projects
     $wp_customize->add_section('projects_section', array(
-        'title' => __('Projects', 'saa-web-developer-portfolio'),
+        'title' => __(text: 'Projects', domain: 'saa-web-developer-portfolio'),
         'priority' => 30,
     ));
 
@@ -399,8 +399,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Add control for the number of projects
     $wp_customize->add_control('total_no_of_projects', array(
-        'label' => __('Total No. of Projects', 'saa-web-developer-portfolio'),
-        'description' => __('Enter the number of projects you want to show on your portfolio', 'saa-web-developer-portfolio'),
+        'label' => __(text: 'Total No. of Projects', domain: 'saa-web-developer-portfolio'),
+        'description' => __(text: 'Enter the number of projects you want to show on your portfolio', domain: 'saa-web-developer-portfolio'),
         'section' => 'projects_section',
         'type' => 'number',
         'input_attrs' => array(
@@ -419,7 +419,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
     // Dynamically add settings and controls based on the number of skills in each category
     foreach ($categories as $category) {
-        $total_skills = get_theme_mod("total_no_of_{$category}_skills", count($skills[$category]));
+        $total_skills = get_theme_mod(name: "total_no_of_{$category}_skills", default_value: count(value: $skills[$category]));
 
         for ($i = 1; $i <= $total_skills; $i++) {
             // Define skill name setting and control
@@ -428,7 +428,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
                 'sanitize_callback' => 'sanitize_text_field',
             ));
             $wp_customize->add_control("{$category}_skill_{$i}_name", array(
-                'label' => __("{$category} Skill {$i} Name", 'saa-web-developer-portfolio'),
+                'label' => __(text: "{$category} Skill {$i} Name", domain: 'saa-web-developer-portfolio'),
                 'section' => "{$category}_skills_section",
                 'type' => 'text',
             ));
@@ -438,8 +438,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
                 'default' => $skills[$category][$i - 1]['image'],
                 'sanitize_callback' => 'esc_url_raw',
             ));
-            $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "{$category}_skill_{$i}_image", array(
-                'label' => __("{$category} Skill {$i} Image", 'saa-web-developer-portfolio'),
+            $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: "{$category}_skill_{$i}_image", args: array(
+                'label' => __(text: "{$category} Skill {$i} Image", domain: 'saa-web-developer-portfolio'),
                 'section' => "{$category}_skills_section",
                 'settings' => "{$category}_skill_{$i}_image",
             )));
@@ -447,20 +447,20 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
 
         // Add a section for each category
         $wp_customize->add_section("{$category}_skills_section", array(
-            'title' => ucfirst($category) . __(' Skills', 'saa-web-developer-portfolio'),
+            'title' => ucfirst(string: $category) . __(text: ' Skills', domain: 'saa-web-developer-portfolio'),
             'priority' => 25,
         ));
 
         // Add setting for the number of skills in each category
         $wp_customize->add_setting("total_no_of_{$category}_skills", array(
-            'default' => count($skills[$category]),
+            'default' => count(value: $skills[$category]),
             'sanitize_callback' => 'absint',
         ));
 
         // Add control for the number of skills in each category
         $wp_customize->add_control("total_no_of_{$category}_skills", array(
-            'label' => __("Total No. of {$category} Skills", 'saa-web-developer-portfolio'),
-            'description' => __("Enter the number of {$category} skills you want to show on your portfolio", 'saa-web-developer-portfolio'),
+            'label' => __(text: "Total No. of {$category} Skills", domain: 'saa-web-developer-portfolio'),
+            'description' => __(text: "Enter the number of {$category} skills you want to show on your portfolio", domain: 'saa-web-developer-portfolio'),
             'section' => "{$category}_skills_section",
             'type' => 'number',
             'input_attrs' => array(
@@ -471,9 +471,9 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize)
         ));
     }
 }
-add_action('customize_register', 'saa_web_developer_portfolio_theme_customizer');
+add_action(hook_name: 'customize_register', callback: 'saa_web_developer_portfolio_theme_customizer');
 
-function saa_web_developer_portfolio_theme_skills($category = null, $count = null)
+function saa_web_developer_portfolio_theme_skills($category = null, $count = null): array
 {
     $default_skills = [
         'frontend' => [
@@ -503,7 +503,7 @@ function saa_web_developer_portfolio_theme_skills($category = null, $count = nul
     if ($category && isset($default_skills[$category])) {
         $category_skills = $default_skills[$category];
         if ($count) {
-            return array_slice($category_skills, 0, $count);
+            return array_slice(array: $category_skills, offset: 0, length: $count);
         }
         return $category_skills;
     }
@@ -511,21 +511,21 @@ function saa_web_developer_portfolio_theme_skills($category = null, $count = nul
     return $default_skills;
 }
 
-function get_skills_from_customizer()
+function get_skills_from_customizer(): array
 {
     $categories = ['frontend', 'backend', 'tools'];
     $skills = [];
 
     foreach ($categories as $category) {
-        $total_skills = absint(get_theme_mod("total_no_of_{$category}_skills", count(saa_web_developer_portfolio_theme_skills($category))));
-        $default_skills = saa_web_developer_portfolio_theme_skills($category, $total_skills); // Pass the total count
+        $total_skills = absint(maybeint: get_theme_mod(name: "total_no_of_{$category}_skills", default_value: count(value: saa_web_developer_portfolio_theme_skills(category: $category))));
+        $default_skills = saa_web_developer_portfolio_theme_skills(category: $category, count: $total_skills); // Pass the total count
 
         $category_skills = [];
         for ($i = 1; $i <= $total_skills; $i++) {
             $default_skill = isset($default_skills[$i - 1]) ? $default_skills[$i - 1] : ['name' => '', 'image' => ''];
             $category_skills[] = [
-                'name' => get_theme_mod("{$category}_skill_{$i}_name", $default_skill['name']),
-                'image' => get_theme_mod("{$category}_skill_{$i}_image", $default_skill['image']),
+                'name' => get_theme_mod(name: "{$category}_skill_{$i}_name", default_value: $default_skill['name']),
+                'image' => get_theme_mod(name: "{$category}_skill_{$i}_image", default_value: $default_skill['image']),
             ];
         }
         $skills[$category] = $category_skills;
@@ -533,7 +533,7 @@ function get_skills_from_customizer()
 
     return $skills;
 }
-function saa_web_developer_portfolio_theme_projects($count = 4)
+function saa_web_developer_portfolio_theme_projects($count = 4): array
 {
     $default_projects = [
         [
@@ -567,7 +567,7 @@ function saa_web_developer_portfolio_theme_projects($count = 4)
     ];
 
     // Ensure there are enough default projects
-    while (count($default_projects) < $count) {
+    while (count(value: $default_projects) < $count) {
         $default_projects[] = [
             'title' => '',
             'image' => '',
@@ -577,26 +577,26 @@ function saa_web_developer_portfolio_theme_projects($count = 4)
         ];
     }
 
-    return array_slice($default_projects, 0, $count);
+    return array_slice(array: $default_projects, offset: 0, length: $count);
 }
 
 
-function get_projects_from_customizer()
+function get_projects_from_customizer(): array
 {
-    $total_projects = absint(get_theme_mod('total_no_of_projects', 4));
+    $total_projects = absint(maybeint: get_theme_mod(name: 'total_no_of_projects', default_value: 4));
     $projects = [];
 
-    $default_projects = saa_web_developer_portfolio_theme_projects($total_projects); // Pass the total count
+    $default_projects = saa_web_developer_portfolio_theme_projects(count: $total_projects); // Pass the total count
 
     for ($i = 1; $i <= $total_projects; $i++) {
         $default_project = $default_projects[$i - 1];
 
         $projects[] = [
-            'title' => get_theme_mod("project_{$i}_title", $default_project['title']),
-            'image' => get_theme_mod("project_{$i}_image", $default_project['image']),
-            'description' => get_theme_mod("project_{$i}_description", $default_project['description']),
-            'live_demo' => get_theme_mod("project_{$i}_live_demo", $default_project['live_demo']),
-            'github' => get_theme_mod("project_{$i}_github", $default_project['github']),
+            'title' => get_theme_mod(name: "project_{$i}_title", default_value: $default_project['title']),
+            'image' => get_theme_mod(name: "project_{$i}_image", default_value: $default_project['image']),
+            'description' => get_theme_mod(name: "project_{$i}_description", default_value: $default_project['description']),
+            'live_demo' => get_theme_mod(name: "project_{$i}_live_demo", default_value: $default_project['live_demo']),
+            'github' => get_theme_mod(name: "project_{$i}_github", default_value: $default_project['github']),
         ];
     }
 
