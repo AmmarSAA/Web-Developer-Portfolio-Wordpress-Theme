@@ -331,10 +331,22 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
     ));
 
     // Dynamically add settings and controls based on the number of projects
-    $total_projects = get_theme_mod(name: 'total_no_of_projects', default_value: 4);
+    $total_projects = get_theme_mod(name: 'total_no_of_projects', default_value: 4); // Get the number of projects
+    $projects = saa_web_developer_portfolio_theme_projects(); // Get the projects data
+
     for ($i = 1; $i <= $total_projects; $i++) {
+        // Check if the project data exists before accessing it
+        $project_data = isset($projects[$i - 1]) ? $projects[$i - 1] : array(
+            'title' => '',
+            'image' => '',
+            'description' => '',
+            'live_demo' => '',
+            'github' => ''
+        );
+
+        // Add setting and control for project title
         $wp_customize->add_setting("project_{$i}_title", array(
-            'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['title'],
+            'default' => $project_data['title'],
             'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control("project_{$i}_title", array(
@@ -343,8 +355,9 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
             'type' => 'text',
         ));
 
+        // Add setting and control for project image
         $wp_customize->add_setting("project_{$i}_image", array(
-            'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['image'],
+            'default' => $project_data['image'],
             'sanitize_callback' => 'esc_url_raw',
         ));
         $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: "project_{$i}_image", args: array(
@@ -353,8 +366,9 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
             'settings' => "project_{$i}_image",
         )));
 
+        // Add setting and control for project description
         $wp_customize->add_setting("project_{$i}_description", array(
-            'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['description'],
+            'default' => $project_data['description'],
             'sanitize_callback' => 'sanitize_textarea_field',
         ));
         $wp_customize->add_control("project_{$i}_description", array(
@@ -363,8 +377,9 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
             'type' => 'textarea',
         ));
 
+        // Add setting and control for project live demo
         $wp_customize->add_setting("project_{$i}_live_demo", array(
-            'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['live_demo'],
+            'default' => $project_data['live_demo'],
             'sanitize_callback' => 'esc_url_raw',
         ));
         $wp_customize->add_control("project_{$i}_live_demo", array(
@@ -373,8 +388,9 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
             'type' => 'url',
         ));
 
+        // Add setting and control for project GitHub URL
         $wp_customize->add_setting("project_{$i}_github", array(
-            'default' => saa_web_developer_portfolio_theme_projects()[$i - 1]['github'],
+            'default' => $project_data['github'],
             'sanitize_callback' => 'esc_url_raw',
         ));
         $wp_customize->add_control("project_{$i}_github", array(
@@ -382,32 +398,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
             'section' => 'projects_section',
             'type' => 'url',
         ));
-
     }
 
-    // Add a section for Projects
-    $wp_customize->add_section('projects_section', array(
-        'title' => __(text: 'Projects', domain: 'saa-web-developer-portfolio'),
-        'priority' => 30,
-    ));
-
-    // Add setting for the number of projects
-    $wp_customize->add_setting('total_no_of_projects', array(
-        'default' => 4,
-        'sanitize_callback' => 'absint',
-    ));
-
-    // Add control for the number of projects
-    $wp_customize->add_control('total_no_of_projects', array(
-        'label' => __(text: 'Total No. of Projects', domain: 'saa-web-developer-portfolio'),
-        'description' => __(text: 'Enter the number of projects you want to show on your portfolio', domain: 'saa-web-developer-portfolio'),
-        'section' => 'projects_section',
-        'type' => 'number',
-        'input_attrs' => array(
-            'min' => 1,
-            'max' => 10,
-        ),
-    ));
 
 
     /* Skills Section Customization Starts Below */
@@ -419,48 +411,24 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
 
     // Dynamically add settings and controls based on the number of skills in each category
     foreach ($categories as $category) {
-        $total_skills = get_theme_mod(name: "total_no_of_{$category}_skills", default_value: count(value: $skills[$category]));
-
-        for ($i = 1; $i <= $total_skills; $i++) {
-            // Define skill name setting and control
-            $wp_customize->add_setting("{$category}_skill_{$i}_name", array(
-                'default' => $skills[$category][$i - 1]['name'],
-                'sanitize_callback' => 'sanitize_text_field',
-            ));
-            $wp_customize->add_control("{$category}_skill_{$i}_name", array(
-                'label' => __(text: "{$category} Skill {$i} Name", domain: 'saa-web-developer-portfolio'),
-                'section' => "{$category}_skills_section",
-                'type' => 'text',
-            ));
-
-            // Define skill image setting and control
-            $wp_customize->add_setting("{$category}_skill_{$i}_image", array(
-                'default' => $skills[$category][$i - 1]['image'],
-                'sanitize_callback' => 'esc_url_raw',
-            ));
-            $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: "{$category}_skill_{$i}_image", args: array(
-                'label' => __(text: "{$category} Skill {$i} Image", domain: 'saa-web-developer-portfolio'),
-                'section' => "{$category}_skills_section",
-                'settings' => "{$category}_skill_{$i}_image",
-            )));
-        }
+        $total_skills = get_theme_mod("total_no_of_{$category}_skills", count($skills[$category]));
 
         // Add a section for each category
         $wp_customize->add_section("{$category}_skills_section", array(
-            'title' => ucfirst(string: $category) . __(text: ' Skills', domain: 'saa-web-developer-portfolio'),
+            'title' => ucfirst($category) . __(' Skills', 'saa-web-developer-portfolio'),
             'priority' => 25,
         ));
 
         // Add setting for the number of skills in each category
         $wp_customize->add_setting("total_no_of_{$category}_skills", array(
-            'default' => count(value: $skills[$category]),
+            'default' => count($skills[$category]),
             'sanitize_callback' => 'absint',
         ));
 
         // Add control for the number of skills in each category
         $wp_customize->add_control("total_no_of_{$category}_skills", array(
-            'label' => __(text: "Total No. of {$category} Skills", domain: 'saa-web-developer-portfolio'),
-            'description' => __(text: "Enter the number of {$category} skills you want to show on your portfolio", domain: 'saa-web-developer-portfolio'),
+            'label' => __("Total No. of {$category} Skills", 'saa-web-developer-portfolio'),
+            'description' => __("Enter the number of {$category} skills you want to show on your portfolio", 'saa-web-developer-portfolio'),
             'section' => "{$category}_skills_section",
             'type' => 'number',
             'input_attrs' => array(
@@ -469,7 +437,36 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
             ),
             'priority' => 1,
         ));
+
+        for ($i = 1; $i <= $total_skills; $i++) {
+            // Check if the skill exists before adding settings and controls
+            $skill_name = isset($skills[$category][$i - 1]['name']) ? $skills[$category][$i - 1]['name'] : '';
+            $skill_image = isset($skills[$category][$i - 1]['image']) ? $skills[$category][$i - 1]['image'] : '';
+
+            // Define skill name setting and control
+            $wp_customize->add_setting("{$category}_skill_{$i}_name", array(
+                'default' => $skill_name,
+                'sanitize_callback' => 'sanitize_text_field',
+            ));
+            $wp_customize->add_control("{$category}_skill_{$i}_name", array(
+                'label' => __("{$category} Skill {$i} Name", 'saa-web-developer-portfolio'),
+                'section' => "{$category}_skills_section",
+                'type' => 'text',
+            ));
+
+            // Define skill image setting and control
+            $wp_customize->add_setting("{$category}_skill_{$i}_image", array(
+                'default' => $skill_image,
+                'sanitize_callback' => 'esc_url_raw',
+            ));
+            $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "{$category}_skill_{$i}_image", array(
+                'label' => __("{$category} Skill {$i} Image", 'saa-web-developer-portfolio'),
+                'section' => "{$category}_skills_section",
+                'settings' => "{$category}_skill_{$i}_image",
+            )));
+        }
     }
+
 }
 add_action(hook_name: 'customize_register', callback: 'saa_web_developer_portfolio_theme_customizer');
 
