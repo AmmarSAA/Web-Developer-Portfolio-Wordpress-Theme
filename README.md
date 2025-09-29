@@ -141,7 +141,7 @@ If you'd like to support further development of this theme, you can [buy me a co
 
 ## License
 
-This theme is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute the theme under the terms of this license.
+This theme is licensed under the GNU General Public License v3.0. You are free to use, modify, and distribute the theme under the terms of this license.
 
 ---
 
