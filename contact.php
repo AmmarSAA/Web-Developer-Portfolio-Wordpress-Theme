@@ -17,7 +17,7 @@
                         <?php echo wp_kses_post(data: get_theme_mod(name: 'contact_description', default_value: 'Let\'s collaborate and bring your ideas to life. I\'m excited to work on innovative projects and explore new opportunities.')); ?>
                     </p>
                 </div>
-                <div class="hidden xl:block">
+                <div class="xl:block">
                     <div class="sociel-media-links font-secondary">
                         <div class="flex flex-col gap-4">
                             <a class="flex items-center gap-1 xl:gap-2 self-start transition hover:grayscale"
@@ -89,3 +89,31 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.querySelector('#contactForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(this);
+        formData.append('action', 'send_contact_form');
+
+        fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.data.message); // Show success message
+                    document.querySelector('#contactForm').reset(); // Clear the form
+                } else {
+                    alert(data.data.message); // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error sending the message.');
+            });
+    });
+
+</script>

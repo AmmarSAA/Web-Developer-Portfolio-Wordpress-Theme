@@ -2,7 +2,7 @@
 // Template Name: Complete Portfolio
 get_header(); ?>
 <div>
-    <div class="px-4"></div>
+    <div class="px-4"  style="margin: 8px !important;"></div>
     <?php get_template_part(slug: 'hero'); ?>
     <div class="border border-main/40"></div>
     <?php get_template_part(slug: 'about'); ?>

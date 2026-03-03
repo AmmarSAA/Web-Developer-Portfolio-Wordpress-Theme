@@ -411,24 +411,24 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
 
     // Dynamically add settings and controls based on the number of skills in each category
     foreach ($categories as $category) {
-        $total_skills = get_theme_mod("total_no_of_{$category}_skills", count($skills[$category]));
+        $total_skills = get_theme_mod(name: "total_no_of_{$category}_skills", default_value: count(value: $skills[$category]));
 
         // Add a section for each category
         $wp_customize->add_section("{$category}_skills_section", array(
-            'title' => ucfirst($category) . __(' Skills', 'saa-web-developer-portfolio'),
+            'title' => ucfirst(string: $category) . __(text: ' Skills', domain: 'saa-web-developer-portfolio'),
             'priority' => 25,
         ));
 
         // Add setting for the number of skills in each category
         $wp_customize->add_setting("total_no_of_{$category}_skills", array(
-            'default' => count($skills[$category]),
+            'default' => count(value: $skills[$category]),
             'sanitize_callback' => 'absint',
         ));
 
         // Add control for the number of skills in each category
         $wp_customize->add_control("total_no_of_{$category}_skills", array(
-            'label' => __("Total No. of {$category} Skills", 'saa-web-developer-portfolio'),
-            'description' => __("Enter the number of {$category} skills you want to show on your portfolio", 'saa-web-developer-portfolio'),
+            'label' => __(text: "Total No. of {$category} Skills", domain: 'saa-web-developer-portfolio'),
+            'description' => __(text: "Enter the number of {$category} skills you want to show on your portfolio", domain: 'saa-web-developer-portfolio'),
             'section' => "{$category}_skills_section",
             'type' => 'number',
             'input_attrs' => array(
@@ -449,7 +449,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
                 'sanitize_callback' => 'sanitize_text_field',
             ));
             $wp_customize->add_control("{$category}_skill_{$i}_name", array(
-                'label' => __("{$category} Skill {$i} Name", 'saa-web-developer-portfolio'),
+                'label' => __(text: "{$category} Skill {$i} Name", domain: 'saa-web-developer-portfolio'),
                 'section' => "{$category}_skills_section",
                 'type' => 'text',
             ));
@@ -459,8 +459,8 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
                 'default' => $skill_image,
                 'sanitize_callback' => 'esc_url_raw',
             ));
-            $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "{$category}_skill_{$i}_image", array(
-                'label' => __("{$category} Skill {$i} Image", 'saa-web-developer-portfolio'),
+            $wp_customize->add_control(new WP_Customize_Image_Control(manager: $wp_customize, id: "{$category}_skill_{$i}_image", args: array(
+                'label' => __(text: "{$category} Skill {$i} Image", domain: 'saa-web-developer-portfolio'),
                 'section' => "{$category}_skills_section",
                 'settings' => "{$category}_skill_{$i}_image",
             )));
@@ -469,6 +469,67 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
 
 }
 add_action(hook_name: 'customize_register', callback: 'saa_web_developer_portfolio_theme_customizer');
+
+// Register navigation menu
+function saa_register_menus() {
+    register_nav_menus(array(
+        'primary' => __('Primary Menu', 'saa-web-developer-portfolio')
+    ));
+}
+add_action('after_setup_theme', 'saa_register_menus');
+
+// Create default menu on theme activation or if menu doesn't exist
+function saa_create_default_menu() {
+    $menu_name = 'Primary Menu';
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+    
+    if (!$menu_exists) {
+        $menu_id = wp_create_nav_menu($menu_name);
+        
+        // Add menu items
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => 'Home',
+            'menu-item-url' => home_url('/'),
+            'menu-item-status' => 'publish',
+            'menu-item-position' => 1
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => 'About',
+            'menu-item-url' => home_url('/#about'),
+            'menu-item-status' => 'publish',
+            'menu-item-position' => 2
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => 'Skills',
+            'menu-item-url' => home_url('/#skills'),
+            'menu-item-status' => 'publish',
+            'menu-item-position' => 3
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => 'Projects',
+            'menu-item-url' => home_url('/#projects'),
+            'menu-item-status' => 'publish',
+            'menu-item-position' => 4
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => 'Contact',
+            'menu-item-url' => home_url('/#contact'),
+            'menu-item-status' => 'publish',
+            'menu-item-position' => 5
+        ));
+        
+        // Assign to primary location
+        $locations = get_theme_mod('nav_menu_locations');
+        $locations['primary'] = $menu_id;
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+}
+add_action('after_switch_theme', 'saa_create_default_menu');
+add_action('admin_init', 'saa_create_default_menu');
 
 function saa_web_developer_portfolio_theme_skills($category = null, $count = null): array
 {
@@ -600,3 +661,210 @@ function get_projects_from_customizer(): array
     return $projects;
 }
 
+
+// Create contact messages table on theme activation
+function create_contact_messages_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'contact_messages';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        email varchar(100) NOT NULL,
+        subject varchar(200) NOT NULL,
+        message text NOT NULL,
+        ip_address varchar(45),
+        created_at datetime DEFAULT CURRENT_TIMESTAMP,
+        is_read tinyint(1) DEFAULT 0,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+add_action('after_setup_theme', 'create_contact_messages_table');
+
+// Handle contact form submission
+add_action('wp_ajax_send_contact_form', 'send_contact_form');
+add_action('wp_ajax_nopriv_send_contact_form', 'send_contact_form');
+
+function send_contact_form(): void {
+    global $wpdb;
+    
+    // Check nonce
+    if (!isset($_POST['contact_nonce']) || !wp_verify_nonce($_POST['contact_nonce'], 'submit_contact_form')) {
+        wp_send_json_error(['message' => 'Security verification failed.']);
+        wp_die();
+    }
+
+    // Sanitize input
+    $email = sanitize_email($_POST['email']);
+    $subject = sanitize_text_field($_POST['subject']);
+    $message = sanitize_textarea_field($_POST['message']);
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+
+    // Validate
+    if (empty($email) || empty($subject) || empty($message)) {
+        wp_send_json_error(['message' => 'All fields are required.']);
+        wp_die();
+    }
+
+    // Save to database
+    $table_name = $wpdb->prefix . 'contact_messages';
+    $inserted = $wpdb->insert(
+        $table_name,
+        [
+            'email' => $email,
+            'subject' => $subject,
+            'message' => $message,
+            'ip_address' => $ip_address
+        ],
+        ['%s', '%s', '%s', '%s']
+    );
+
+    if ($inserted) {
+        // Try to send email notification (won't fail if SMTP not configured)
+        $to = 'syedammarahmed14@outlook.com';
+        $email_subject = 'New Contact Form Message: ' . $subject;
+        $email_message = "You have received a new message:\n\n";
+        $email_message .= "From: $email\n";
+        $email_message .= "Subject: $subject\n\n";
+        $email_message .= "Message:\n$message\n\n";
+        $email_message .= "View all messages: " . admin_url('admin.php?page=contact-messages');
+        
+        $headers = ['Reply-To: ' . $email];
+        @wp_mail($to, $email_subject, $email_message, $headers); // @ suppresses errors if mail fails
+
+        wp_send_json_success(['message' => 'Thank you! Your message has been received.']);
+    } else {
+        wp_send_json_error(['message' => 'Failed to save your message. Please try again.']);
+    }
+
+    wp_die();
+}
+
+// Add admin menu for viewing messages
+add_action('admin_menu', 'add_contact_messages_menu');
+
+function add_contact_messages_menu() {
+    add_menu_page(
+        'Contact Messages',
+        'Contact Messages',
+        'manage_options',
+        'contact-messages',
+        'display_contact_messages',
+        'dashicons-email',
+        25
+    );
+}
+
+// Display messages in admin
+function display_contact_messages() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'contact_messages';
+    
+    // Mark as read if viewing
+    if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {
+        $wpdb->update($table_name, ['is_read' => 1], ['id' => intval($_GET['mark_read'])]);
+    }
+    
+    // Delete message
+    if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
+        $wpdb->delete($table_name, ['id' => intval($_GET['delete'])]);
+    }
+    
+    $messages = $wpdb->get_results("SELECT * FROM $table_name ORDER BY created_at DESC");
+    $unread_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE is_read = 0");
+    
+    ?>
+    <div class="wrap">
+        <h1>Contact Messages <span class="update-count"><?php echo $unread_count; ?> unread</span></h1>
+        <table class="wp-list-table widefat fixed striped">
+            <thead>
+                <tr>
+                    <th width="5%">ID</th>
+                    <th width="20%">Email</th>
+                    <th width="25%">Subject</th>
+                    <th width="35%">Message</th>
+                    <th width="10%">Date</th>
+                    <th width="5%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (empty($messages)): ?>
+                    <tr><td colspan="6">No messages yet.</td></tr>
+                <?php else: ?>
+                    <?php foreach ($messages as $msg): ?>
+                        <tr style="<?php echo $msg->is_read ? '' : 'background: #fff8dc;'; ?>">
+                            <td><?php echo $msg->id; ?></td>
+                            <td><a href="mailto:<?php echo esc_attr($msg->email); ?>"><?php echo esc_html($msg->email); ?></a></td>
+                            <td><strong><?php echo esc_html($msg->subject); ?></strong></td>
+                            <td><?php echo esc_html(substr($msg->message, 0, 100)) . (strlen($msg->message) > 100 ? '...' : ''); ?></td>
+                            <td><?php echo date('M j, Y g:i A', strtotime($msg->created_at)); ?></td>
+                            <td>
+                                <?php if (!$msg->is_read): ?>
+                                    <a href="?page=contact-messages&mark_read=<?php echo $msg->id; ?>">Mark Read</a> |
+                                <?php endif; ?>
+                                <a href="?page=contact-messages&delete=<?php echo $msg->id; ?>" onclick="return confirm('Delete this message?')">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+
+
+
+
+
+
+
+
+
+function redirect_404_to_custom_page() {
+    if (is_404()) {
+        $page = get_page_by_path('404-page');
+        if ($page) {
+            wp_redirect(get_permalink($page));
+            exit;
+        }
+    }
+}
+add_action('template_redirect', 'redirect_404_to_custom_page');
+// Remove WordPress version exposure
+remove_action('wp_head', 'wp_generator');
+remove_action('wp_head', 'wlwmanifest_link');
+remove_action('wp_head', 'rsd_link');
+
+// Add Schema.org markup
+add_action('wp_head', 'add_schema_markup');
+function add_schema_markup() {
+    if (is_front_page()) {
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            'name' => get_bloginfo('name'),
+            'url' => home_url(),
+            'jobTitle' => 'Full Stack Developer',
+            'description' => get_bloginfo('description'),
+            'sameAs' => [
+                'https://github.com/AmmarSAA',
+                'https://linkedin.com/in/AmmarSAA'
+            ]
+        ];
+        echo '<script type="application/ld+json">' . json_encode($schema) . '</script>';
+    }
+}
+
+// Enable lazy loading for images
+add_filter('wp_lazy_loading_enabled', '__return_true');
+add_filter('wp_get_attachment_image_attributes', function($attr) {
+    $attr['loading'] = 'lazy';
+    return $attr;
+}, 10, 1);
+
+// Enable WP Mail SMTP Pro features (local development)
+add_filter('wp_mail_smtp_core_is_pro', '__return_true');

@@ -45,7 +45,7 @@ $skills = get_skills_from_customizer();
             </div>
 
             <!-- Backend Skills -->
-            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex flex-col xl:flex-row gap-8">
                 <div class="w-full space-y-4">
                     <h4 class="text-center font-semibold text-typewriter">
                         Backend
