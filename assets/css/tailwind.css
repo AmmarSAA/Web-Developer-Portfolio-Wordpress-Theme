@@ -1457,3 +1457,28 @@ body {
 .NavBar_navLink__0HK8i:hover {
   color: rgba(var(--main));
 }
+nav ul li a {
+  position: relative;
+  cursor: pointer;
+}
+nav ul li a:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0;
+  height: 2.7px;
+  background: rgba(var(--typewriter));
+  transition: all 0.5s;
+}
+nav ul li a:hover:after {
+  width: 100%;
+}
+nav ul li a:hover {
+  color: rgba(var(--main));
+}
+#mobile-menu nav ul li a:after {
+  display: none;
+}

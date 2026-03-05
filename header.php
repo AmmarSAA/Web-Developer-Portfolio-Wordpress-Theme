@@ -15,7 +15,7 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/tailwind.css">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/tailwind.css?v=1.3">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/main.css">
 
     <title>
