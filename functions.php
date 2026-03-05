@@ -261,7 +261,7 @@ function saa_web_developer_portfolio_theme_customizer($wp_customize): void
 
     // Add setting for Footer link
     $wp_customize->add_setting('footer_link', array(
-        'default' => 'https://github.com/ammarsaa/ammarsaa.me',
+        'default' => 'https://github.com/ammarsaa/Web-Developer-Portfolio-Wordpress-Theme',
         'sanitize_callback' => 'esc_url_raw',
     ));
 

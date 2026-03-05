@@ -11,7 +11,7 @@
         </div>
         <div>
             <a class="flex items-center gap-1 hover:cursor-pointer"
-                href="<?php echo esc_url(url: get_theme_mod(name: 'github_link', default_value: 'https://github.com/ammarsaa/ammarsaa.me')); ?>"
+                href="<?php echo esc_url(url: get_theme_mod(name: 'github_link', default_value: 'https://github.com/ammarsaa/Web-Developer-Portfolio-Wordpress-Theme')); ?>"
                 target="_blank">
                 <img alt="github" loading="lazy" width="20" height="20" decoding="async" class="w-4"
                     style="color: transparent"
