@@ -5,6 +5,8 @@
  * Template Name: 404 Page
  * @package Web Developer Portfolio 
  * */
+status_header(404);
+nocache_headers();
 get_header(); ?>
 
 <div style="text-align: center; padding: 50px;">

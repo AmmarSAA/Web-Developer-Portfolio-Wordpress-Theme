@@ -824,16 +824,6 @@ function display_contact_messages() {
 
 
 
-function redirect_404_to_custom_page() {
-    if (is_404()) {
-        $page = get_page_by_path('404-page');
-        if ($page) {
-            wp_redirect(get_permalink($page));
-            exit;
-        }
-    }
-}
-add_action('template_redirect', 'redirect_404_to_custom_page');
 // Remove WordPress version exposure
 remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'wlwmanifest_link');
